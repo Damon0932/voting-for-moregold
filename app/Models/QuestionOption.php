@@ -31,7 +31,8 @@ class QuestionOption extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function question() {
+    public function question()
+    {
         return $this->belongsTo(Question::class);
     }
 
@@ -40,6 +41,7 @@ class QuestionOption extends Model
      */
     public function getSelectedTimesAttribute()
     {
-        return \Redis::command('HGET', ['voting_more_gold_' . $this->question_id, 'option_'.$this->id]);
+        $count = \Redis::command('HGET', ['voting_more_gold_' . $this->question_id, 'option_' . $this->id]);
+        return $count ? $count : 0;
     }
 }
