@@ -45,7 +45,7 @@ class HomeController extends Controller
             dd('Please try again later');
         }
         $expiresAt = now()->addDay(1);
-        \Cache::put('voted_user_id', Auth::user()->id, $expiresAt);
+        \Cache::put('voted_user_id_'.Auth::user()->id, true, $expiresAt);
         //  TODO
         \Redis::command('HINCRBY', ['voting_more_gold_' . $request->input('question_id'), 'option_'.$request->input('question_option_id'), 1]);
         return view('statistics', [

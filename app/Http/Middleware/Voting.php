@@ -15,7 +15,7 @@ class Voting
      */
     public function handle($request, Closure $next)
     {
-        if (\Cache::has('voted_user_id') && \Cache::get('voted_user_id') == \Auth::user()->id) {
+        if (\Cache::has('voted_user_id_'.\Auth::user()->id) && \Cache::get('voted_user_id_'.\Auth::user()->id)) {
             dd("You've voted for it");
         }
         return $next($request);
