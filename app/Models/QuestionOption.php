@@ -34,4 +34,12 @@ class QuestionOption extends Model
     public function question() {
         return $this->belongsTo(Question::class);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSelectedTimesAttribute()
+    {
+        return \Redis::command('HGET', ['voting_more_gold_' . $this->question_id, 'option_'.$this->id]);
+    }
 }
