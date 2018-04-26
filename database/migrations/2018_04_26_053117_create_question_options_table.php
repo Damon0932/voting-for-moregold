@@ -15,6 +15,9 @@ class CreateQuestionOptionsTable extends Migration
     {
         Schema::create('question_options', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('question_id')->nullable();
+            $table->string('question_option_name')->nullable();
+            $table->text('question_option_content')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +29,9 @@ class CreateQuestionOptionsTable extends Migration
      */
     public function down()
     {
+        Schema::table('question_options', function (Blueprint $table) {
+            $table->dropForeign('question_options_question_id_foreign');
+        });
         Schema::dropIfExists('question_options');
     }
 }

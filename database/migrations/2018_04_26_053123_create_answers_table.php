@@ -15,6 +15,9 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('question_id')->nullable();
+            $table->unsignedInteger('question_option_id')->nullable();
+            $table->unsignedInteger('user_id')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +29,11 @@ class CreateAnswersTable extends Migration
      */
     public function down()
     {
+        Schema::table('answers', function (Blueprint $table) {
+            $table->dropForeign('answers_question_id_foreign');
+            $table->dropForeign('answers_question_option_id_foreign');
+            $table->dropForeign('answers_user_id_foreign');
+        });
         Schema::dropIfExists('answers');
     }
 }
