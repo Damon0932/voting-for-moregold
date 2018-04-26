@@ -19,6 +19,8 @@ class CreateQuestionOptionsTable extends Migration
             $table->string('question_option_name')->nullable();
             $table->text('question_option_content')->nullable();
             $table->timestamps();
+
+            $table->foreign('question_id')->references('id')->on('questions');
         });
     }
 

@@ -19,6 +19,10 @@ class CreateAnswersTable extends Migration
             $table->unsignedInteger('question_option_id')->nullable();
             $table->unsignedInteger('user_id')->nullable();
             $table->timestamps();
+
+            $table->foreign('question_id')->references('id')->on('questions');
+            $table->foreign('question_option_id')->references('id')->on('question_options');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
