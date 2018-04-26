@@ -16,5 +16,6 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::post("/voting/create", ["as" => "voting.create", "uses" => "HomeController@voting"]);
 Route::any("/voting/statistics", ["as" => "voting.statistics", "uses" => "HomeController@statistics"]);
